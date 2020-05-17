@@ -49,6 +49,26 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: 
         })
     })
 
+    app.get('/time/checkProject/:code', async(req,res)=>{
+        if(!req.params.code){
+            throw new Error('Enter subject code')
+        }
+            var mysort = {REVIEW:-1}
+            db.collection('user').find({ CODE: req.params.code,TYPE:'EPJ' }).sort(mysort).toArray((error, result) => {
+            res.send(result)
+        })
+    })
+
+    app.get('/time/checkLab/:code', async(req,res)=>{
+        if(!req.params.code){
+            throw new Error('Enter subject code')
+        }
+            var mysort = {REVIEW:-1}
+            db.collection('user').find({ CODE: req.params.code,TYPE:'ELA' }).sort(mysort).toArray((error, result) => {
+            res.send(result)
+        })
+    })
+
     app.get("/time/subjectCode",(req,res)=>{
         var mysort = {CODE: 1 };
         db.collection('Subjects').find({}).toArray((error,result)=>{
