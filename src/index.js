@@ -71,7 +71,7 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: 
 
     app.get("/time/subjectCode",(req,res)=>{
         var mysort = {CODE: 1 };
-        db.collection('Subjects').find({}).toArray((error,result)=>{
+        db.collection('Subjects').find({}).sort(mysort).toArray((error,result)=>{
             res.send(result)
  
     
